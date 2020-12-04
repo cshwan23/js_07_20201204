@@ -1,0 +1,94 @@
+<!-- 
+~~~~~~~~~~~~~~~~~
+js_20.html
+~~~~~~~~~~~~~~~~~
+ -->
+<!DOCTYPE html>
+<html><meta charset="utf-8">
+<head>
+	<title></title>
+<script type="text/javascript">
+	//주민앞자리 숫자 6 뒷자리 7자리
+	// 뒷자리 3,4 인사람은 앞이 뭐가 아니여야하나
+
+	function checkJumin_num(no){
+
+		var jumin_num1 = document.myForm.jumin_num1.value;
+		var jumin_num2 = document.myForm.jumin_num2.value; 
+
+
+		// 1. 숫자여야하고
+		// 2. 길이는 6자리
+		// 3. 3~4자리 01~12
+		// 4. 5~6자리 00~31
+
+		if (no==1){
+
+			if(jumin_num1.length>0){
+				var regExp = new RegExp(/^[0-9]{0,6}$/);
+				var result = regExp.test(jumin_num1);
+				if (result==false){
+					alert("주민번호 앞자리는 숫자 6자리로만 구성해야합니다.")
+					document.myForm.jumin_num1.value = "";
+					document.myForm.jumin_num1.focus();
+					
+				}
+			}
+
+			
+				var regExp = new RegExp(/^[0-9][0-9][01][0-9][0-3][0-1]$/);
+				var result = regExp.test(jumin_num1);
+
+				if (result==false){
+					alert("주민번호 앞자리의 날짜가 정확하지 않습니다.")
+				}
+
+				if(jumin_num1.length==6){
+					document.myForm.jumin_num2.focus();
+				}
+			}
+			
+		}
+
+		//-------------------------------
+		// 1. 숫자여야하고
+		// 2. 길이는 6자리
+		// 3. 3~4자리 00~12
+		// 4. 5~6자리 00~31
+		if (no==2){
+			if(jumin_num2.length>0){
+				var regExp = new RegExp(/^[0-9]{0,7}$/)
+				var result = regExp.test(jumin_num2);
+				if (result==false){
+					alert("주민번호 뒷자리는 숫자로만 구성해야합니다.")
+					document.myForm.jumin_num2.value = "";
+					document.myForm.jumin_num2.focus();
+				}
+
+			}
+
+
+
+
+		}
+
+
+
+
+
+
+
+
+	</script>
+
+</head>
+<body onload="document.myForm.jumin_num1.focus();"><center>
+
+	<form name=myForm>
+		<input type="text" name="jumin_num1" maxlength=6 onkeyup="checkJumin_num(1);" onblur="checkJumin_num(3)">
+		-
+		<input type="text" name="jumin_num2" onkeyup="checkJumin_num(2);" onblur="checkJumin_num(4)">
+	</form>
+
+</body>
+</html>

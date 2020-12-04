@@ -1,0 +1,166 @@
+<!-- 
+~~~~~~~~~~~~~~~~~
+js_19.html
+~~~~~~~~~~~~~~~~~
+	onkeyup="checkPhone();"
+	키보드 눌렀다 뗏을때 발생되는 함수 
+
+	onblur="checkPhone2();"
+	커서가 빠질때 발생되는 함수
+ -->
+<!DOCTYPE html>
+<html><meta charset="utf-8">
+<head>
+	<title></title>
+	<script type="text/javascript">
+
+		function checkPhone(no){
+			var phone1 = document.myForm.phone1.value;
+			var phone2 = document.myForm.phone2.value;
+			var phone3 = document.myForm.phone3.value;
+
+			if(no==1){
+				if(phone2.length>=1&&phone2.length<4){
+					alert("2번째 핸드폰 번호는 4개 이어야 합니다.")
+					document.myForm.phone2.focus();
+					
+				}
+				if(phone3.length>=1&&phone3.length<4){
+					alert("3번째 핸드폰 번호는 4개 이어야 합니다.")
+					document.myForm.phone3.focus();
+					
+				}
+				
+				var regExp = new RegExp(/^[0-9]{0,3}$/)
+				var result = regExp.test(phone1);
+
+				if(result==false){
+					alert("핸드폰 앞자리는 숫자 3개 여야 합니다.");
+					document.myForm.phone1.value="";
+					return;
+				}
+				if (phone1.length==3){
+					document.myForm.phone2.focus();
+				}
+
+			}else if(no==2){
+				if(phone1.length>=1&&phone1.length<3){
+					alert("1번째 핸드폰 번호는 3개 이어야 합니다.")
+					document.myForm.phone1.focus();
+					
+				}
+				if(phone3.length>=1&&phone3.length<4){
+					alert("3번째 핸드폰 번호는 4개 이어야 합니다.")
+					document.myForm.phone3.focus();
+					
+				}
+
+				if((phone1.length==0)&&(phone2.length>0)){
+					alert("핸드폰 앞자리를 먼저 입력해주삼..")
+					document.myForm.phone2.value="";
+					document.myForm.phone1.focus();
+					return;
+				}
+
+				var regExp = new RegExp(/^[0-9]{0,4}$/)
+				var result = regExp.test(phone2);
+
+				if(result==false){
+					alert("핸드폰 둘째자리는 숫자 4개 여야 합니다.");
+					document.myForm.phone2.value="";
+				}
+				if (phone2.length==4){
+					document.myForm.phone3.focus();
+				}
+
+			}else if(no==3){
+				if(phone1.length>=1&&phone1.length<3){
+					alert("1번째 핸드폰 번호는 3개 이어야 합니다.")
+					document.myForm.phone1.focus();
+					
+				}
+				if(phone2.length>=1&&phone2.length<4){
+					alert("2번째 핸드폰 번호는 4개 이어야 합니다.")
+					document.myForm.phone2.focus();
+					
+				}
+				if((phone1.length==0)&&(phone3.length>0)){
+					alert("핸드폰 앞자리를 먼저 입력해주삼..")
+					document.myForm.phone3.value="";
+					document.myForm.phone1.focus();
+					return;
+				}
+				if((phone2.length==0)&&(phone3.length>0)){
+					alert("핸드폰 앞자리를 먼저 입력해주삼..")
+					document.myForm.phone3.value="";
+					document.myForm.phone2.focus();
+					return;
+				}
+				var regExp = new RegExp(/^[0-9]{0,4}$/)
+				var result = regExp.test(phone3);
+
+				if(result==false){
+					alert("핸드폰 셋째자리는 숫자 4개 여야 합니다.");
+					document.myForm.phone3.value="";
+				}
+				if (phone3.length==4){
+					document.myForm.phone3.focus();
+				}
+
+			}
+		}
+
+		function checkPhone2(no){
+
+			var phone1 = document.myForm.phone1.value;
+			var phone2 = document.myForm.phone2.value;
+			var phone3 = document.myForm.phone3.value;
+
+			if(no==1){
+
+				if(phone1.length<3){
+					alert("핸드폰 1번째 자리에 3자가 아닙니다.");
+					document.myForm.phone1.focus();
+					
+				}
+			}else if (no==2){
+				if(phone2.length<4){
+					alert("핸드폰 2번째 자리에 4자가 아닙니다.");
+					document.myForm.phone2.focus();
+					
+				}
+
+			}else if(no==3){
+				if(phone3.length<4){
+					alert("핸드폰 3번째 자리에 4자가 아닙니다.");
+					document.myForm.phone3.focus();
+				
+				}
+			}
+		}
+
+
+
+	</script>
+</head>
+<body onload="document.myForm.phone1.focus();"><center>
+
+	<!-- <form name=myForm>
+		<input type="text" name="phone1" onkeyup="checkPhone(1);" onblur="checkPhone(1);">
+		-
+		<input type="text" name="phone2" onkeyup="checkPhone(2);" onblur="checkPhone(2);">
+		-
+		<input type="text" name="phone3" onkeyup="checkPhone(3);" onblur="checkPhone(3);">
+		</form> -->
+	<form name=myForm>
+
+		<input type="text" name="phone1" onkeyup="checkPhone(1);" onblur="checkPhone2(1);">
+		-
+		<input type="text" name="phone2" onkeyup="checkPhone(2);" onblur="checkPhone2(2);">
+		-
+		<input type="text" name="phone3" onkeyup="checkPhone(3);" onblur="checkPhone2(3);">
+
+	</form>
+
+</body>
+</html>
